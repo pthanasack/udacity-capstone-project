@@ -14,6 +14,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -47,5 +48,5 @@ dependencies {
     implementation 'info.androidhive:fontawesome:0.0.5'
     implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
-
+    implementation 'com.android.support:multidex:1.0.3'
 }
