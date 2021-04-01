@@ -1,11 +1,14 @@
 package com.google.example.rpgnotes.ui.home;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +24,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.example.rpgnotes.DetailActivity;
 import com.google.example.rpgnotes.R;
 
 import com.google.android.gms.ads.AdView;
@@ -35,10 +39,15 @@ import com.google.example.rpgnotes.ui.RpgNoteAdapter;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements RpgNoteAdapter.RpgNoteAdapterClickHandler {
     private AdView mAdView;
     private HomeViewModel homeViewModel;
     private RpgNoteViewModel model;
+
+    final private String INTENT_NOTE_ID = "@string/INTENT_NOTE_ID";
+    final private String INTENT_NOTE_TITLE = "@string/INTENT_NOTE_TITLE";
+    final private String INTENT_NOTE_CONTENT = "@string/INTENT_NOTE_CONTENT";
+    final private String INTENT_NOTE_TYPE = "@string/INTENT_NOTE_TYPE";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,11 +62,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //RpgNoteData
-        model = new ViewModelProvider(this).get(RpgNoteViewModel.class);
+        //RpgNoteData with Shared ViewModel owned by the Activity
+        model = new ViewModelProvider(requireActivity()).get(RpgNoteViewModel.class);
         //link the recyclerview to the adapter
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview_home);
-        final RpgNoteAdapter adapter = new RpgNoteAdapter(new RpgNoteAdapter.RpgNoteDiff());
+        final RpgNoteAdapter adapter = new RpgNoteAdapter(new RpgNoteAdapter.RpgNoteDiff(), this);
         model.mAllRpgNote.observe(getViewLifecycleOwner(), adapter::submitList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -77,11 +86,37 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //open detail activity
+                //Intent parameters: context, destination class
+                Context context = getContext();
+                Class destinationClass = DetailActivity.class;
+                //new intent with empty note values
+                Intent startDetailedActivityIntent = new Intent(context, destinationClass);
+                startDetailedActivityIntent.putExtra(INTENT_NOTE_ID,"0");
+                //start new activity with Intent
+                startActivity(startDetailedActivityIntent);
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
         return root;
+    }
+
+    @Override
+    public void onClick(int noteId, String noteTitle, String noteType, String noteContent) {
+        //open detail activity
+        //Intent parameters: context, destination class
+        Context context = getContext();
+        Class destinationClass = DetailActivity.class;
+        //new intent with note values
+        Intent startDetailedActivityIntent = new Intent(context, destinationClass);
+        startDetailedActivityIntent.putExtra(INTENT_NOTE_ID, String.valueOf(noteId));
+        startDetailedActivityIntent.putExtra(INTENT_NOTE_TITLE,noteTitle);
+        startDetailedActivityIntent.putExtra(INTENT_NOTE_CONTENT,noteContent);
+        startDetailedActivityIntent.putExtra(INTENT_NOTE_TYPE,noteType);
+        //start new activity with Intent
+        startActivity(startDetailedActivityIntent);
+        Toast.makeText(context, String.valueOf(noteId), Toast.LENGTH_SHORT).show();
     }
 }

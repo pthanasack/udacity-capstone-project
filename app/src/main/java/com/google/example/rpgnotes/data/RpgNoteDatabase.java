@@ -49,11 +49,13 @@ public abstract class RpgNoteDatabase extends RoomDatabase {
 
                 // Get the database and empty it
                 RpgNoteDao dao = getInstance(context).mRpgNoteDao();
-                dao.deleteAllRpgNote();
+                //dao.deleteAllRpgNote();
                 // fill the database
-                RpgNote note = new RpgNote(0, "Note1", "NPC", "Romeo is a knight", Calendar.getInstance().getTime());
+                RpgNote note = new RpgNote(1, "Romeo", "NPC", "Romeo is a knight", Calendar.getInstance().getTime());
                 dao.insertRpgNote(note);
-                note = new RpgNote(0, "Note2", "Monster", "Beeholder", Calendar.getInstance().getTime());
+                note = new RpgNote(2, "Beeholder", "Monster", "One eyed monster", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
+                note = new RpgNote(3, "Forest", "Area", "Haunted forest", Calendar.getInstance().getTime());
                 dao.insertRpgNote(note);
 
 
