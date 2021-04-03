@@ -40,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        app:pressedTranslationZ="12dp"
+        android:contentDescription="@string/CONTENT_DESCRIPTION_ADD"/>
 
     <!--        TODO (1) Change the Banner Id with the one created in AdMob-->
     <com.google.android.gms.ads.AdView

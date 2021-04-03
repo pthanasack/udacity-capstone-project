@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/add_note_title_hint" >
+        android:hint="@string/add_note_title_hint"
+        android:contentDescription="@string/CONTENT_DESCRIPTION_TITLE_INPUT">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_note_title_text"
@@ -37,7 +38,8 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_note_title_input"
-        android:hint="@string/add_note_content_hint" >
+        android:hint="@string/add_note_content_hint"
+        android:contentDescription="@string/CONTENT_DESCRIPTION_CONTENT_INPUT">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_note_content_text"
@@ -78,7 +80,8 @@
         android:text="@string/add_note_save_button"
         app:layout_constraintEnd_toStartOf="@+id/button_delete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_note_content_input" />
+        app:layout_constraintTop_toBottomOf="@+id/add_note_content_input"
+        android:contentDescription="@string/CONTENT_DESCRIPTION_SAVE_BUTTON"/>
 
     <Button
         android:id="@+id/button_delete"
@@ -88,7 +91,8 @@
         android:text="@string/add_note_delete_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_save"
-        app:layout_constraintTop_toBottomOf="@+id/add_note_content_input" />
+        app:layout_constraintTop_toBottomOf="@+id/add_note_content_input"
+        android:contentDescription="@string/CONTENT_DESCRIPTION_DELETE_BUTTON"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

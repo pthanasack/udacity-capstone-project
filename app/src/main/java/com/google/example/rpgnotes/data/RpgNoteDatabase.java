@@ -57,6 +57,16 @@ public abstract class RpgNoteDatabase extends RoomDatabase {
                 dao.insertRpgNote(note);
                 note = new RpgNote(3, "Forest", "Area", "Haunted forest", Calendar.getInstance().getTime());
                 dao.insertRpgNote(note);
+                note = new RpgNote(4, "Juliet", "PC", "Princess not to rescue", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
+                note = new RpgNote(5, "Devin", "PC", "Skilled Bard", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
+                note = new RpgNote(6, "Pesso", "PC", "Penguin Companion", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
+                note = new RpgNote(7, "Emerald Sword", "Item", "Legendary Weapon", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
+                note = new RpgNote(8, "Love Potion", "Item", "Random results", Calendar.getInstance().getTime());
+                dao.insertRpgNote(note);
 
 
     };

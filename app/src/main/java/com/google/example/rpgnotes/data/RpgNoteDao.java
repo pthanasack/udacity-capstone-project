@@ -17,8 +17,8 @@ public interface RpgNoteDao {
     @Query("SELECT * FROM rpgnote ORDER BY timestamp DESC")
     LiveData<List<RpgNote>> getAll();
 
-    @Query("SELECT * FROM rpgnote WHERE notetype = :type ORDER BY timestamp DESC")
-    LiveData<List<RpgNote>> getAllByType(String type);
+    @Query("SELECT * FROM rpgnote WHERE notetype = 'PC' ORDER BY timestamp DESC")
+    LiveData<List<RpgNote>> getPcNotes();
 
     @Query("SELECT * FROM rpgnote WHERE noteid = :id")
     RpgNote getRpgNoteById(int id);

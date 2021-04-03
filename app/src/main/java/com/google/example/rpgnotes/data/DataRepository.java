@@ -6,14 +6,13 @@ import androidx.lifecycle.LiveData;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class DataRepository {
     private RpgNoteDao mRpgNoteDao;
     private LiveData<List<RpgNote>> mAllRpgNote;
     private static volatile DataRepository sInstance = null;
 
-    DataRepository(Context context) {
+    public DataRepository(Context context) {
 
         RpgNoteDatabase db = RpgNoteDatabase.getInstance(context);
         mRpgNoteDao = db.mRpgNoteDao();
@@ -25,8 +24,8 @@ public class DataRepository {
         return mAllRpgNote;
     }
 
-    LiveData<List<RpgNote>> getAllNoteByType(String type){
-        mAllRpgNote = mRpgNoteDao.getAllByType(type);
+    public LiveData<List<RpgNote>> getPcNotes(){
+        mAllRpgNote = mRpgNoteDao.getPcNotes();
         return mAllRpgNote;
     }
 

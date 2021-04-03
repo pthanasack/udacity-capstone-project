@@ -1,11 +1,9 @@
 package com.google.example.rpgnotes.data;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.Date;
 import java.util.List;
@@ -19,13 +17,6 @@ public class RpgNoteViewModel extends AndroidViewModel {
         this.mRepository = new DataRepository(application);
         this.mAllRpgNote = mRepository.getAllRpgNote();
     }
-
-    public RpgNoteViewModel(Application application, String type) {
-        super(application);
-        this.mRepository = new DataRepository(application);
-        this.mAllRpgNote = mRepository.getAllNoteByType(type);
-    }
-
 
     public LiveData<List<RpgNote>> getmAllRpgNote() {
         return mAllRpgNote;
