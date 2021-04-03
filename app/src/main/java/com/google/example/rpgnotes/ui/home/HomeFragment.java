@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.example.rpgnotes.DetailActivity;
@@ -33,6 +37,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.example.rpgnotes.analytics.AnalyticsApplication;
 import com.google.example.rpgnotes.data.RpgNote;
 import com.google.example.rpgnotes.data.RpgNoteViewModel;
 import com.google.example.rpgnotes.ui.RpgNoteAdapter;
@@ -43,6 +48,25 @@ public class HomeFragment extends Fragment implements RpgNoteAdapter.RpgNoteAdap
     private AdView mAdView;
     private HomeViewModel homeViewModel;
     private RpgNoteViewModel model;
+    private Tracker mTracker;
+
+    private String TAG_HOME_FRAGMENT_ANALYTICS = "@string/TAG_HOME_FRAGMENT_ANALYTICS" ;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String MSG_HOME_ANALYTICS = "@string/MSG_HOME_ANALYTICS";
+        Log.i(TAG_HOME_FRAGMENT_ANALYTICS, MSG_HOME_ANALYTICS);
+        String IMAGE_HOME_ANALYTICS = "@string/IMAGE_HOME_ANALYTICS";
+        mTracker.setScreenName(IMAGE_HOME_ANALYTICS);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        String EVENT_VIEW_ANALYTICS = "@string/EVENT_VIEW_ANALYTICS";
+        String EVENT_RESUME_ANALYTICS = "@string/EVENT_RESUME_ANALYTICS";
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(EVENT_VIEW_ANALYTICS)
+                .setAction(EVENT_RESUME_ANALYTICS)
+                .build());
+    }
 
     final private String INTENT_NOTE_ID = "@string/INTENT_NOTE_ID";
     final private String INTENT_NOTE_TITLE = "@string/INTENT_NOTE_TITLE";
@@ -69,7 +93,13 @@ public class HomeFragment extends Fragment implements RpgNoteAdapter.RpgNoteAdap
         final RpgNoteAdapter adapter = new RpgNoteAdapter(new RpgNoteAdapter.RpgNoteDiff(), this);
         model.mAllRpgNote.observe(getViewLifecycleOwner(), adapter::submitList);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        //set divider in recyclerview
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                ((LinearLayoutManager) layoutManager).getOrientation());
+        recyclerView.addItemDecoration(mDividerItemDecoration);
+
 
         //AD
         MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
@@ -100,6 +130,11 @@ public class HomeFragment extends Fragment implements RpgNoteAdapter.RpgNoteAdap
             }
         });
 
+        //analytics
+        // Obtain the shared Tracker instance.
+        AnalyticsApplication application = (AnalyticsApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
         return root;
     }
 
@@ -117,6 +152,6 @@ public class HomeFragment extends Fragment implements RpgNoteAdapter.RpgNoteAdap
         startDetailedActivityIntent.putExtra(INTENT_NOTE_TYPE,noteType);
         //start new activity with Intent
         startActivity(startDetailedActivityIntent);
-        Toast.makeText(context, String.valueOf(noteId), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, String.valueOf(noteId), Toast.LENGTH_SHORT).show();
     }
 }

@@ -11,17 +11,22 @@
     <string name="menu_add">Add RPG Note</string>
     <string name="menu_search">Search RPG Note</string>
 
-    <string name="INTENT_NOTE_ID">INTENT_NOTE_ID</string>
-    <string name="INTENT_NOTE_CONTENT">INTENT_NOTE_CONTENT</string>
-    <string name="INTENT_NOTE_TITLE">INTENT_NOTE_TITLE</string>
-    <string name="INTENT_NOTE_TYPE">INTENT_NOTE_TYPE</string>
-
     <string name="add_note_title_hint">RPG note title</string>
     <string name="add_note_content_hint">RPG note title content</string>
     <string name="add_note_save_button">Save</string>
     <string name="add_note_save_message"> RPG Note saved</string>
     <string name="add_note_delete_button">Delete</string>
     <string name="add_note_delete_message"> RPG Note deleted</string>
+
+    <string name="input_title_error_message"> Field required </string>
+
+
+    <!-- Note types for Analytics -->
+    <string name="TAG_HOME_FRAGMENT_ANALYTICS">HOME_FRAGMENT_ANALYTICS</string>
+    <string name="MSG_HOME_ANALYTICS">Setting screen name: Home Activity</string>
+    <string name="IMAGE_HOME_ANALYTICS">Image~HomeActivity</string>
+    <string name="EVENT_VIEW_ANALYTICS">View</string>
+    <string name="EVENT_RESUME_ANALYTICS">onResume</string>*
 
     <!-- Note types for Add Spinner -->
     <string-array name="note_type">
@@ -31,6 +36,13 @@
         <item>Item</item>
         <item>Area</item>
     </string-array>
+
+
+    <string name="INTENT_NOTE_ID">INTENT_NOTE_ID</string>
+    <string name="INTENT_NOTE_CONTENT">INTENT_NOTE_CONTENT</string>
+    <string name="INTENT_NOTE_TITLE">INTENT_NOTE_TITLE</string>
+    <string name="INTENT_NOTE_TYPE">INTENT_NOTE_TYPE</string>
+
 
     <!-- SOLID ICONS -->
     <string name="fa_glass_martini_solid">&#xf000;</string>

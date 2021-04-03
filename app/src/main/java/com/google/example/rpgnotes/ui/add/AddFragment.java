@@ -43,7 +43,7 @@ public class AddFragment extends Fragment implements AdapterView.OnItemSelectedL
                              ViewGroup container, Bundle savedInstanceState) {
         addViewModel =
                 new ViewModelProvider(this).get(AddViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_add_note, container, false);
+        View root = inflater.inflate(R.layout.activity_add_change_note, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         addViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -77,8 +77,15 @@ public class AddFragment extends Fragment implements AdapterView.OnItemSelectedL
                 final TextInputEditText note_content_input = (TextInputEditText) root.findViewById(R.id.add_note_content_text);
                 String note_content = note_content_input.getText().toString();
                 final RpgNote newRpgNote = new RpgNote(note_title, spinnerValue, note_content, Calendar.getInstance().getTime());
-                model.insert(newRpgNote);
-                Toast.makeText(getActivity(), note_title + R.string.add_note_save_message, Toast.LENGTH_LONG).show();
+                //save only if it has content
+                if (!(note_title.isEmpty()) && !(note_content.isEmpty())) {
+                    model.insert(newRpgNote);
+                    Toast.makeText(getActivity(), note_title + " " + getString(R.string.add_note_save_message), Toast.LENGTH_LONG).show();
+                } else
+                {
+                    note_title_input.setError(getString(R.string.input_title_error_message));
+                }
+
             }
         });
 
@@ -94,7 +101,7 @@ public class AddFragment extends Fragment implements AdapterView.OnItemSelectedL
                 String note_content = note_content_input.getText().toString();
                 final RpgNote newRpgNote = new RpgNote(note_title, spinnerValue, note_content, Calendar.getInstance().getTime());
                 model.delete(newRpgNote);
-                Toast.makeText(getActivity(), note_title + R.string.add_note_delete_message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), note_title+ " " + getString(R.string.add_note_delete_message), Toast.LENGTH_LONG).show();
             }
         });
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "247490951349",
+    "project_id": "udacity-capstone-project-4b76f",
+    "storage_bucket": "udacity-capstone-project-4b76f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247490951349:android:a092d127df20be77a766fc",
+        "android_client_info": {
+          "package_name": "com.google.example.rpgnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247490951349-qi7ie7k1cf4ld4blbps464615vedkk94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVwWQwhzLFjgdUbi8HiP9DC3At8co4yl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247490951349-qi7ie7k1cf4ld4blbps464615vedkk94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

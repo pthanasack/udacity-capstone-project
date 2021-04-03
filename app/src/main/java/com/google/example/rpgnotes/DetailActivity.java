@@ -2,9 +2,7 @@ package com.google.example.rpgnotes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,10 +10,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,10 +20,7 @@ import com.google.example.rpgnotes.data.RpgNote;
 import com.google.example.rpgnotes.data.RpgNoteViewModel;
 import com.google.example.rpgnotes.ui.add.AddViewModel;
 
-import java.sql.Types;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,7 +37,7 @@ public class DetailActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_add_note);
+        setContentView(R.layout.activity_add_change_note);
 
         final TextInputEditText note_title_input = (TextInputEditText) findViewById(R.id.add_note_title_text);
         final TextInputEditText note_content_input = (TextInputEditText) findViewById(R.id.add_note_content_text);
@@ -64,7 +57,6 @@ public class DetailActivity extends AppCompatActivity implements AdapterView.OnI
         //RpgNoteData with Shared ViewModel owned by the Activity
         //link the recyclerview to the adapter
         model = new ViewModelProvider(this).get(RpgNoteViewModel.class);
-
 
         //Spinner Data
         Spinner spinner = (Spinner) findViewById(R.id.add_note_spinner);
@@ -100,12 +92,18 @@ public class DetailActivity extends AppCompatActivity implements AdapterView.OnI
                 //if it's an existing note we need to save
                 if (noteId>0){
                     model.updateById(noteId, note_title,  note_content, spinnerValue, Calendar.getInstance().getTime());
+                    Toast.makeText(getApplicationContext(), note_title + getString(R.string.add_note_save_message), Toast.LENGTH_LONG).show();
                 } else{
                     //otherwise it's a new note to save
-                    final RpgNote newRpgNote = new RpgNote(note_title, note_content, spinnerValue, Calendar.getInstance().getTime());
-                    model.insert(newRpgNote);
+                    if (!(note_title.isEmpty()) && !(note_content.isEmpty())) {
+                        final RpgNote newRpgNote = new RpgNote(note_title, spinnerValue, note_content, Calendar.getInstance().getTime());
+                        model.insert(newRpgNote);
+                        Toast.makeText(getApplicationContext(), note_title + " "  + getString(R.string.add_note_save_message), Toast.LENGTH_LONG).show();
+                    }else
+                        {
+                        note_title_input.setError( getString(R.string.input_title_error_message) );
+                    }
                 }
-               // Toast.makeText(this, note_title + R.string.add_note_save_message, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -115,8 +113,9 @@ public class DetailActivity extends AppCompatActivity implements AdapterView.OnI
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String note_title = note_title_input.getText().toString();
                 model.deleteById(noteId);
-              //  Toast.makeText(this, note_title + R.string.add_note_delete_message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), note_title + " " + getString(R.string.add_note_delete_message), Toast.LENGTH_LONG).show();
             }
         });
     }
