@@ -8,6 +8,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.Date;
 import java.util.List;
 
@@ -37,5 +39,8 @@ public interface RpgNoteDao {
 
     @Query("UPDATE rpgnote SET notetitle = :title , notecontent= :content , notetype= :type, timestamp= :date WHERE noteid= :id")
     void updateRpgNoteById(int id, String title, String content, String type, Date date);
+
+    @Query("SELECT * FROM rpgnote WHERE ((notetitle LIKE '%' || :input || '%') OR (notecontent LIKE '%' || :input || '%'))")
+    LiveData<List<RpgNote>> searchNotesLike(String input);
 
 }

@@ -15,11 +15,6 @@
             android:title="@string/menu_add"
             android:contentDescription="@string/CONTENT_DESCRIPTION_ADD"/>
         <item
-            android:id="@+id/nav_search"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_search"
-            android:contentDescription="@string/CONTENT_DESCRIPTION_SEARCH"/>
-        <item
             android:id="@+id/nav_pcnotes"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/menu_pcnotes"

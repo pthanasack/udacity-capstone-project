@@ -16,12 +16,16 @@ public class RpgNoteViewModel extends AndroidViewModel {
         super(application);
         this.mRepository = new DataRepository(application);
         this.mAllRpgNote = mRepository.getAllRpgNote();
+
     }
 
     public LiveData<List<RpgNote>> getmAllRpgNote() {
         return mAllRpgNote;
     }
 
+    public LiveData<List<RpgNote>> searchNotesLike(String input)  {
+       return mRepository.searchNotesLike(input);
+    }
 
     public void insert(RpgNote rpgNote){
         mRepository.insert(rpgNote);

@@ -19,6 +19,9 @@
     <string name="add_note_delete_button">Delete</string>
     <string name="add_note_delete_message"> RPG Note deleted</string>
 
+    <string name="search_hint">Search for a RPG Note</string>
+    <string name="search_title">Search for a RPG Note</string>
+
     <string name="input_title_error_message"> Field required </string>
 
     <!-- CONTENT Descriptions-->

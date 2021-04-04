@@ -4,8 +4,12 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class DataRepository {
     private RpgNoteDao mRpgNoteDao;
@@ -53,5 +57,9 @@ public class DataRepository {
             mRpgNoteDao.updateRpgNoteById(noteId, title, content, type, date);
         });
     }
+
+    LiveData<List<RpgNote>> searchNotesLike(String input){
+           return  mRpgNoteDao.searchNotesLike(input);
+        };
 
 }

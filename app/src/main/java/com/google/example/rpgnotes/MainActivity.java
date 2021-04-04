@@ -1,9 +1,12 @@
 package com.google.example.rpgnotes;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.example.rpgnotes.data.RpgNoteViewModel;
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_add, R.id.nav_search, R.id.nav_pcnotes)
+                R.id.nav_home, R.id.nav_add, R.id.nav_pcnotes)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -57,8 +60,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //TODO 2 inflate the approriate menu items according to the activity
+
         getMenuInflater().inflate(R.menu.main, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
@@ -81,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         iconHeader.setImageDrawable(drawable);
 
         int[] icons = {
-                R.string.fa_home_solid, R.string.fa_plus_circle_solid, R.string.fa_search_solid, R.string.fa_user_solid
+                R.string.fa_home_solid, R.string.fa_plus_circle_solid, R.string.fa_user_solid
         };
         renderMenuIcons(navigationView.getMenu(), icons, true, false);
 
