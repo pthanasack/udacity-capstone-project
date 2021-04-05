@@ -6,6 +6,15 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'udacity'
+            storeFile file('../app/key.jks')
+            storePassword 'udacity'
+        }
+    }
+
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
 
@@ -25,6 +34,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+            release {
+                signingConfig signingConfigs.release
+            }
     }
 
     compileOptions {
