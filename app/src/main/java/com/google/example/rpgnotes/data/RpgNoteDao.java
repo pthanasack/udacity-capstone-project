@@ -43,4 +43,10 @@ public interface RpgNoteDao {
     @Query("SELECT * FROM rpgnote WHERE ((notetitle LIKE '%' || :input || '%') OR (notecontent LIKE '%' || :input || '%'))")
     LiveData<List<RpgNote>> searchNotesLike(String input);
 
+    @Query("SELECT COUNT(*) FROM rpgnote")
+    int getRpgNoteNumber();
+
+    @Query("SELECT COUNT(*) FROM rpgnote WHERE notetype = 'PC'")
+    int getPcNoteNumber();
+
 }

@@ -48,9 +48,6 @@ dependencies {
     /*added for project*/
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.room:room-common:2.2.6'
-    // Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:2.2.6"
-    implementation 'androidx.paging:paging-common:2.1.2'
     implementation 'info.androidhive:fontawesome:0.0.5'
     implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'

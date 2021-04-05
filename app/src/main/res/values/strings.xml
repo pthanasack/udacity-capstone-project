@@ -7,6 +7,11 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="appwidget_text">Total RPG Notes: </string>
+    <string name="appwidget_title">RPG Notes widget</string>
+    <string name="appwidget_pcnotes">PC Notes: </string>
+    <string name="add_widget">Add widget</string>
+
     <string name="menu_home">RPG Notes</string>
     <string name="menu_add">Add RPG Note</string>
     <string name="menu_search">Search RPG Note</string>
@@ -993,4 +998,5 @@
     <string name="fa_trash_restore_solid">&#xf829;</string>
     <string name="fa_trash_restore_alt_solid">&#xf82a;</string>
     <string name="fa_user_nurse_solid">&#xf82f;</string>
+
 </resources>

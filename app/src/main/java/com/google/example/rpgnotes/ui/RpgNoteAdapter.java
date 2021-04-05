@@ -45,6 +45,7 @@ public class RpgNoteAdapter extends ListAdapter<RpgNote, RpgNoteAdapter.RpgNoteV
             holder.bind(current);
     }
 
+
     public static class RpgNoteDiff extends DiffUtil.ItemCallback<RpgNote> {
 
         @Override
