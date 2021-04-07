@@ -50,10 +50,9 @@
         android:id="@+id/note_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="4dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="4dp"
         tools:text="Note Date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
